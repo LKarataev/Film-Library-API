@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  app:
+    container_name: FilmLibraryAPI
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DATABASE_URL=FilmLibraryDB
+    depends_on:
+      FilmLibraryDB:
+        condition: service_healthy
+  FilmLibraryDB:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: my_secret_password
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "localhost", "-p", "5432", "-U", "postgres"]
+      interval: 2s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - './_postgres/:/docker-entrypoint-initdb.d/'

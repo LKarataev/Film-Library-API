@@ -1,0 +1,233 @@
+swagger: '2.0'
+info:
+  version: "1.0.0"
+  title: Film Library API
+  description: API for managing a film library
+host: localhost:8080
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /authenticate:
+    get:
+      summary: User Authentication
+      description: This method accepts a username and password and returns a JWT token.
+      parameters:
+        - in: query
+          name: username
+          type: string
+          required: true
+          description: The username of the user
+        - in: query
+          name: password
+          type: string
+          required: true
+          description: The password of the user
+      responses:
+        200:
+          description: Successful authentication, JWT token returned
+          schema:
+            $ref: '#/definitions/AuthToken'
+        401:
+          description: Unauthorized, incorrect username or password
+  /actors/{id}:
+    get:
+      summary: Get information about an actor
+      description: Retrieves details about a specific actor based on their ID.
+      operationId: getActor
+      parameters:
+        - name: id
+          in: path
+          description: ID of the actor to retrieve
+          required: true
+          type: integer
+          format: int
+      responses:
+        200:
+          description: Actor details retrieved successfully
+          schema:
+            $ref: '#/definitions/Actor'
+        401:
+          description: Unauthorized, incorrect username or password
+        404:
+          description: Actor not found
+  /films/{id}:
+    get:
+      summary: Get information about a film
+      description: Retrieves details about a specific film based on its ID.
+      operationId: getFilm
+      parameters:
+        - name: id
+          in: path
+          description: ID of the film to retrieve
+          required: true
+          type: integer
+          format: int
+      responses:
+        200:
+          description: Film details retrieved successfully
+          schema:
+            $ref: '#/definitions/Film'
+        401:
+          description: Unauthorized, incorrect username or password
+        404:
+          description: Film not found
+  /actors:
+    post:
+      summary: Add a new actor
+      description: Adds a new actor to the library
+      operationId: addActor
+      parameters:
+        - in: body
+          name: actor
+          description: Actor object that needs to be added to the library
+          required: true
+          schema:
+            $ref: '#/definitions/Actor'
+      responses:
+        201:
+          description: Actor created
+        401:
+          description: Unauthorized
+        405:
+          description: Invalid input
+    put:
+      summary: Update an existing actor
+      description: Updates an actor in the library
+      operationId: updateActor
+      parameters:
+        - name: id
+          in: body
+          description: ID of actor that needs to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Actor'
+      responses:
+        400:
+          description: Invalid ID supplied
+        401:
+          description: Unauthorized
+        404:
+          description: Actor not found
+        405:
+          description: Validation exception
+    delete:
+      summary: Deletes an actor
+      description: Deletes a single actor
+      operationId: deleteActor
+      parameters:
+        - name: id
+          in: body
+          description: ID of the actor to delete
+          required: true
+          schema:
+            $ref: '#/definitions/Actor'
+      responses:
+        400:
+          description: Invalid ID supplied
+        401:
+          description: Unauthorized
+        404:
+          description: Actor not found
+  /films:
+    post:
+      summary: Add a new film
+      description: Adds a new film to the library
+      operationId: addFilm
+      parameters:
+        - in: body
+          name: film
+          description: Film object that needs to be added to the library
+          required: true
+          schema:
+            $ref: '#/definitions/Film'
+      responses:
+        201:
+          description: Film created
+        401:
+          description: Unauthorized
+        405:
+          description: Invalid input
+    put:
+      summary: Update an existing film
+      description: Updates a film in the library
+      operationId: updateFilm
+      parameters:
+        - name: id
+          in: body
+          description: ID of film that needs to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Film'
+      responses:
+        400:
+          description: Invalid ID supplied
+        401:
+          description: Unauthorized
+        404:
+          description: Film not found
+        405:
+          description: Validation exception
+    delete:
+      summary: Deletes a film
+      description: Deletes a single film
+      operationId: deleteFilm
+      parameters:
+        - name: id
+          in: body
+          description: ID of the film to delete
+          required: true
+          schema:
+            $ref: '#/definitions/Film'
+      responses:
+        400:
+          description: Invalid ID supplied
+        401:
+          description: Unauthorized
+        404:
+          description: Film not found
+definitions:
+  Actor:
+    type: object
+    required:
+      - name
+    properties:
+      id:
+        type: integer
+        format: int
+      name:
+        type: string
+      gender:
+        type: string
+        enum:
+          - M
+          - F
+      birthday:
+        type: string
+        format: date
+  Film:
+    type: object
+    required:
+      - name
+    properties:
+      id:
+        type: integer
+        format: int
+      name:
+        type: string
+      year:
+        type: integer
+      description:
+        type: string
+      rating:
+        type: number
+        format: float
+  AuthToken:
+    type: object
+    properties:
+      X-Auth-Token:
+        type: string

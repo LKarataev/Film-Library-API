@@ -10,10 +10,10 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/LKarataev/Film-Library/internal/auth"
-	"github.com/LKarataev/Film-Library/internal/dao"
-	"github.com/LKarataev/Film-Library/internal/handlers"
-	"github.com/LKarataev/Film-Library/internal/parser"
+	"github.com/LKarataev/Film-Library-API/internal/auth"
+	"github.com/LKarataev/Film-Library-API/internal/dao"
+	"github.com/LKarataev/Film-Library-API/internal/handlers"
+	"github.com/LKarataev/Film-Library-API/internal/parser"
 	_ "github.com/lib/pq"
 )
 

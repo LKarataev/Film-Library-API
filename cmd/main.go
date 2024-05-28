@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/LKarataev/Film-Library/internal/service"
+	"github.com/LKarataev/Film-Library-API/internal/service"
 	_ "github.com/lib/pq"
 )
 

@@ -3,7 +3,7 @@ package handlers
 import (
 	"fmt"
 
-	"github.com/LKarataev/Film-Library/internal/dao"
+	"github.com/LKarataev/Film-Library-API/internal/dao"
 )
 
 type AccountsRepositoryMock struct {

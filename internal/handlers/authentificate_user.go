@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/LKarataev/Film-Library/internal/auth"
-	"github.com/LKarataev/Film-Library/internal/dao"
+	"github.com/LKarataev/Film-Library-API/internal/auth"
+	"github.com/LKarataev/Film-Library-API/internal/dao"
 )
 
 type AuthenticateUserHandler struct {

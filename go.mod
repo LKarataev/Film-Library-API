@@ -1,4 +1,4 @@
-module github.com/LKarataev/Film-Library
+module github.com/LKarataev/Film-Library-API
 
 go 1.22.0
 
